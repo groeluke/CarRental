@@ -48,29 +48,103 @@ namespace CarRental
             errorMessage = "";
 
             // Customer Information - cannot be blank
-            if (string.IsNullOrWhiteSpace(CustomerNameTextBox.Text)) errorMessage += "• Customer Name is required\n";
-            if (string.IsNullOrWhiteSpace(AddressTextBox.Text)) errorMessage += "• Address is required\n";
-            if (string.IsNullOrWhiteSpace(CityTextBox.Text)) errorMessage += "• City is required\n";
-            if (string.IsNullOrWhiteSpace(StateTextBox.Text)) errorMessage += "• State is required\n";
-            if (string.IsNullOrWhiteSpace(ZipCodeTextBox.Text)) errorMessage += "• Zip Code is required\n";
+            if (string.IsNullOrWhiteSpace(CustomerNameTextBox.Text))
+            {
+                CustomerNameTextBox.BackColor = Color.LightYellow;
+                errorMessage += "Customer Name is required";
+            }
+            else
+            {
+                CustomerNameTextBox.BackColor = Color.White;
+            }
+            if (string.IsNullOrWhiteSpace(AddressTextBox.Text))
+            {
+                AddressTextBox.BackColor = Color.LightYellow;
+                errorMessage += "Address is required";
+            }
+            if (string.IsNullOrWhiteSpace(CityTextBox.Text))
+            {
+                CityTextBox.BackColor = Color.LightYellow;
+                errorMessage += "City is required";
+            }
+            else
+            {
+                CityTextBox.BackColor = Color.White;
+            }
+            if (string.IsNullOrWhiteSpace(StateTextBox.Text))
+            {
+                StateTextBox.BackColor = Color.LightYellow;
+                errorMessage += "State is required";
+            }
+            else
+            {
+                StateTextBox.BackColor = Color.White;
+            }
+            if (string.IsNullOrWhiteSpace(ZipCodeTextBox.Text))
+            {
+                ZipCodeTextBox.BackColor = Color.LightYellow;
+                errorMessage += "Zip Code is required";
+            }
+            else
+            {
+                ZipCodeTextBox.BackColor = Color.White;
+            }
 
             // Odometer Readings
-            if (!double.TryParse(BeginningReadingTextBox.Text, out double begin))
-                errorMessage += "• Beginning odometer must be a valid number\n";
+            if (double.TryParse(BeginningReadingTextBox.Text, out double begin))
+            {
+                BeginningReadingTextBox.BackColor = Color.LightYellow;
+                errorMessage += "Beginning odometer must be a valid number";
+            }
+            else    
+            {
+                BeginningReadingTextBox.BackColor = Color.White;
+            }
 
-            if (!double.TryParse(EndingReadingTextBox.Text, out double end))
-                errorMessage += "• Ending odometer must be a valid number\n";
-
+            if (double.TryParse(EndingReadingTextBox.Text, out double end))
+            {
+                EndingReadingTextBox.BackColor = Color.LightYellow;
+                errorMessage += "Ending odometer must be a valid number";
+            }
+            else
+            {
+                EndingReadingTextBox.BackColor = Color.White;
+            }
             if (begin >= end)
-                errorMessage += "• Ending odometer must be greater than Beginning odometer\n";
+            {
+                    BeginningReadingTextBox.BackColor = Color.LightYellow;
+                    EndingReadingTextBox.BackColor = Color.LightYellow;
+                errorMessage += "Ending odometer must be greater than Beginning odometer";
+            }
+            else
+            {
+                BeginningReadingTextBox.BackColor = Color.White;
+                EndingReadingTextBox.BackColor = Color.White;
+            }
 
             // Number of Days
-            if (!int.TryParse(NumberOfDaysTextBox.Text, out int days))
-                errorMessage += "• Number of days must be a valid number\n";
-            else if (days < 1 || days > 45)
-                errorMessage += "• Number of days must be between 1 and 45\n";
+            if (int.TryParse(NumberOfDaysTextBox.Text, out int days))
+            {
+                NumberOfDaysTextBox.BackColor = Color.LightYellow;
+                errorMessage += "Number of days must be a valid number";
+            }
+            else
+            {
+                NumberOfDaysTextBox.BackColor = Color.White;
+            }
+            if (days < 1 || days > 45)
+            {
+                NumberOfDaysTextBox.BackColor = Color.LightYellow;
+                errorMessage += "Number of days must be between 1 and 45";
+            }
+            else
+            {
+                NumberOfDaysTextBox.BackColor = Color.White;
+            }
 
             return string.IsNullOrEmpty(errorMessage);
+            // check all the fields for valid input, if any are invalid,
+            // build an error message and return false, if all are valid return true
         }
 
         private double GetMilesDriven()
@@ -88,7 +162,7 @@ namespace CarRental
 
         private double KilometersToMiles(double kilometers)
         {
-
+            return kilometers * 0.621;
         }
 
         private double CalculateDailyCharge(int days)
@@ -105,7 +179,8 @@ namespace CarRental
             // 201 - 500 miles @ $0.12
             if (miles > 200)
             {
-                double milesInMiddle = Math.Min(miles - 200, 300); // max 300 miles in this tier
+                double milesInMiddle = Math.Min(miles - 200, 300); 
+                // max 300 miles in this tier
                 charge += milesInMiddle * 0.12;
             }
 
@@ -156,7 +231,7 @@ namespace CarRental
             DistanceDrivenInMilesTextBox.Text = $"{milesDriven:F1} mi";
             MileageChargeTextBox.Text = mileageCharge.ToString("C");
             DayChargeTextBox.Text = dailyCharge.ToString("C");
-            MinusDiscountTextBox.Text = $"-{discount:C}";
+            MinusDiscountTextBox.Text = $"{discount:C}";
             YouOweTextBox.Text = totalDue.ToString("C");
 
             // update summary totals
@@ -188,35 +263,18 @@ namespace CarRental
             string summary = $"Total Customers: {totalCustomers}\n" +
                              $"Total Miles Driven: {totalMilesDriven:F1} mi\n" +
                              $"Total Charges: {totalCharges:C}";
-            MessageBox.Show(summary, "Summary", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(summary, "Summary", 
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to exit?", "Exit Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Are you sure you want to exit?", 
+                "Exit Confirmation", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 this.Close();
             }
-        }
-
-        private void MilesRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void KilometersRadioButton_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AAADiscountCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SeniorDiscountCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

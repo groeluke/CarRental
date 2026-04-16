@@ -77,6 +77,7 @@
             CalculateButton.Size = new Size(112, 34);
             CalculateButton.TabIndex = 0;
             CalculateButton.Text = "Calculate";
+            MainToolTip.SetToolTip(CalculateButton, "Calculate the total");
             CalculateButton.UseVisualStyleBackColor = true;
             CalculateButton.Click += CalculateButton_Click;
             // 
@@ -87,6 +88,7 @@
             ClearButton.Size = new Size(112, 34);
             ClearButton.TabIndex = 1;
             ClearButton.Text = "Clear";
+            MainToolTip.SetToolTip(ClearButton, "Clear uses input");
             ClearButton.UseVisualStyleBackColor = true;
             ClearButton.Click += ClearButton_Click;
             // 
@@ -97,6 +99,7 @@
             SummaryButton.Size = new Size(112, 34);
             SummaryButton.TabIndex = 2;
             SummaryButton.Text = "Summary";
+            MainToolTip.SetToolTip(SummaryButton, "Display a summary of the total charges, miles driven, abd the total customers");
             SummaryButton.UseVisualStyleBackColor = true;
             SummaryButton.Click += SummaryButton_Click;
             // 
@@ -107,6 +110,7 @@
             ExitButton.Size = new Size(112, 34);
             ExitButton.TabIndex = 3;
             ExitButton.Text = "Exit";
+            MainToolTip.SetToolTip(ExitButton, "Exit the application");
             ExitButton.UseVisualStyleBackColor = true;
             ExitButton.Click += ExitButton_Click;
             // 
@@ -120,7 +124,6 @@
             MilesRadioButton.TabStop = true;
             MilesRadioButton.Text = "Miles";
             MilesRadioButton.UseVisualStyleBackColor = true;
-            MilesRadioButton.CheckedChanged += MilesRadioButton_CheckedChanged;
             // 
             // KilometersRadioButton
             // 
@@ -132,7 +135,6 @@
             KilometersRadioButton.TabStop = true;
             KilometersRadioButton.Text = "Kilometers";
             KilometersRadioButton.UseVisualStyleBackColor = true;
-            KilometersRadioButton.CheckedChanged += KilometersRadioButton_CheckedChanged;
             // 
             // OdometerGroupBox
             // 
@@ -165,7 +167,6 @@
             SeniorDiscountCheckBox.TabIndex = 1;
             SeniorDiscountCheckBox.Text = "Senior Citizen Dicount";
             SeniorDiscountCheckBox.UseVisualStyleBackColor = true;
-            SeniorDiscountCheckBox.CheckedChanged += SeniorDiscountCheckBox_CheckedChanged;
             // 
             // AAADiscountCheckBox
             // 
@@ -176,7 +177,6 @@
             AAADiscountCheckBox.TabIndex = 0;
             AAADiscountCheckBox.Text = "AAA Member Discount";
             AAADiscountCheckBox.UseVisualStyleBackColor = true;
-            AAADiscountCheckBox.CheckedChanged += AAADiscountCheckBox_CheckedChanged;
             // 
             // CustomerNameLabel
             // 
@@ -229,6 +229,7 @@
             CustomerNameTextBox.Name = "CustomerNameTextBox";
             CustomerNameTextBox.Size = new Size(150, 31);
             CustomerNameTextBox.TabIndex = 15;
+            MainToolTip.SetToolTip(CustomerNameTextBox, "Enter your name");
             // 
             // AddressTextBox
             // 
@@ -236,6 +237,7 @@
             AddressTextBox.Name = "AddressTextBox";
             AddressTextBox.Size = new Size(150, 31);
             AddressTextBox.TabIndex = 16;
+            MainToolTip.SetToolTip(AddressTextBox, " Enter your home address");
             // 
             // CityTextBox
             // 
@@ -243,6 +245,7 @@
             CityTextBox.Name = "CityTextBox";
             CityTextBox.Size = new Size(150, 31);
             CityTextBox.TabIndex = 17;
+            MainToolTip.SetToolTip(CityTextBox, "Enter your home city");
             // 
             // StateTextBox
             // 
@@ -250,6 +253,7 @@
             StateTextBox.Name = "StateTextBox";
             StateTextBox.Size = new Size(150, 31);
             StateTextBox.TabIndex = 18;
+            MainToolTip.SetToolTip(StateTextBox, "Enter the state you are from");
             // 
             // ZipCodeTextBox
             // 
@@ -257,6 +261,7 @@
             ZipCodeTextBox.Name = "ZipCodeTextBox";
             ZipCodeTextBox.Size = new Size(150, 31);
             ZipCodeTextBox.TabIndex = 19;
+            MainToolTip.SetToolTip(ZipCodeTextBox, "Enter your Zip code");
             // 
             // BeginningReadingTextBox
             // 
@@ -264,6 +269,7 @@
             BeginningReadingTextBox.Name = "BeginningReadingTextBox";
             BeginningReadingTextBox.Size = new Size(150, 31);
             BeginningReadingTextBox.TabIndex = 21;
+            MainToolTip.SetToolTip(BeginningReadingTextBox, "Enter what the odometer reading was before your trip");
             // 
             // BeginningOdometerReadingLabel
             // 
@@ -280,6 +286,7 @@
             EndingReadingTextBox.Name = "EndingReadingTextBox";
             EndingReadingTextBox.Size = new Size(150, 31);
             EndingReadingTextBox.TabIndex = 23;
+            MainToolTip.SetToolTip(EndingReadingTextBox, "Enter the odometer reading after your trip");
             // 
             // EndingOdometerReadingLabel
             // 
@@ -296,6 +303,7 @@
             NumberOfDaysTextBox.Name = "NumberOfDaysTextBox";
             NumberOfDaysTextBox.Size = new Size(150, 31);
             NumberOfDaysTextBox.TabIndex = 25;
+            MainToolTip.SetToolTip(NumberOfDaysTextBox, "Enter the amount of days of your trip");
             // 
             // NumberOfDaysLabel
             // 
@@ -357,6 +365,7 @@
             DistanceDrivenInMilesTextBox.Name = "DistanceDrivenInMilesTextBox";
             DistanceDrivenInMilesTextBox.Size = new Size(189, 31);
             DistanceDrivenInMilesTextBox.TabIndex = 31;
+            MainToolTip.SetToolTip(DistanceDrivenInMilesTextBox, "This is the top total calculated distance");
             // 
             // MileageChargeTextBox
             // 
@@ -364,6 +373,7 @@
             MileageChargeTextBox.Name = "MileageChargeTextBox";
             MileageChargeTextBox.Size = new Size(189, 31);
             MileageChargeTextBox.TabIndex = 32;
+            MainToolTip.SetToolTip(MileageChargeTextBox, "Charge for the miles/kilometers driven");
             // 
             // DayChargeTextBox
             // 
@@ -371,6 +381,7 @@
             DayChargeTextBox.Name = "DayChargeTextBox";
             DayChargeTextBox.Size = new Size(189, 31);
             DayChargeTextBox.TabIndex = 33;
+            MainToolTip.SetToolTip(DayChargeTextBox, "Amount charged per day rented");
             // 
             // MinusDiscountTextBox
             // 
@@ -378,6 +389,7 @@
             MinusDiscountTextBox.Name = "MinusDiscountTextBox";
             MinusDiscountTextBox.Size = new Size(189, 31);
             MinusDiscountTextBox.TabIndex = 34;
+            MainToolTip.SetToolTip(MinusDiscountTextBox, "The discount applyed to customers total");
             // 
             // YouOweTextBox
             // 
@@ -385,6 +397,7 @@
             YouOweTextBox.Name = "YouOweTextBox";
             YouOweTextBox.Size = new Size(189, 31);
             YouOweTextBox.TabIndex = 35;
+            MainToolTip.SetToolTip(YouOweTextBox, "What the customer owes");
             // 
             // CarRental
             // 
