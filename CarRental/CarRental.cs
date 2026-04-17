@@ -9,10 +9,9 @@ namespace CarRental
 {
     public partial class CarRental : Form
     {
-        string errorMessage = "";
-        private int totalCustomers = 0;
-        private double totalMilesDriven = 0;
-        private double totalCharges = 0;
+        int totalCustomers = 0;
+        int totalMilesDriven = 0;
+        double totalCharges = 0;
         public CarRental()
         {
             InitializeComponent();
@@ -44,111 +43,86 @@ namespace CarRental
             // set all to default values, clear textboxes, select other options
         }
 
-        bool AllFieldsValid(out string errorMessage)
+        bool AllFieldsValid()
         {
             bool isValid = true;
 
             // Customer Information - cannot be blank
-            if (string.IsNullOrWhiteSpace(CustomerNameTextBox.Text))
+            if (CustomerNameTextBox.Text == "")
             {
                 CustomerNameTextBox.BackColor = Color.LightYellow;
-               errorMessage += " - Customer Name is required";
             }
             else
             {
                 CustomerNameTextBox.BackColor = Color.White;
             }
-            if (string.IsNullOrWhiteSpace(AddressTextBox.Text))
+            if (AddressTextBox.Text == "")
             {
                 AddressTextBox.BackColor = Color.LightYellow;
-                errorMessage += " - Address is required";
             }
-            if (string.IsNullOrWhiteSpace(CityTextBox.Text))
+            if (CityTextBox.Text == "")
             {
                 CityTextBox.BackColor = Color.LightYellow;
-                errorMessage += " - City is required";
             }
             else
             {
                 CityTextBox.BackColor = Color.White;
             }
-            if (string.IsNullOrWhiteSpace(StateTextBox.Text))
+            if (StateTextBox.Text == "")
             {
                 StateTextBox.BackColor = Color.LightYellow;
-                errorMessage += " - State is required";
             }
             else
             {
                 StateTextBox.BackColor = Color.White;
             }
-            if (string.IsNullOrWhiteSpace(ZipCodeTextBox.Text))
+            if (ZipCodeTextBox.Text == "")
             {
                 ZipCodeTextBox.BackColor = Color.LightYellow;
-                errorMessage += " - Zip Code is required";
             }
             else
             {
                 ZipCodeTextBox.BackColor = Color.White;
             }
 
-            // Odometer Readings
-            if (double.TryParse(BeginningReadingTextBox.Text, out double begin))
+            if (BeginningReadingTextBox.Text == "")
             {
                 BeginningReadingTextBox.BackColor = Color.LightYellow;
-                errorMessage +=" - Beginning odometer must be a valid number";
             }
             else    
             {
                 BeginningReadingTextBox.BackColor = Color.White;
             }
 
-            if (double.TryParse(EndingReadingTextBox.Text, out double end))
+            if (EndingReadingTextBox.Text == "")
             {
                 EndingReadingTextBox.BackColor = Color.LightYellow;
-                errorMessage += " - Ending odometer must be a valid number";
             }
             else
             {
                 EndingReadingTextBox.BackColor = Color.White;
             }
-            if (begin >= end)
-            {
-                    BeginningReadingTextBox.BackColor = Color.LightYellow;
-                    EndingReadingTextBox.BackColor = Color.LightYellow;
-                errorMessage += " - Ending odometer must be greater than Beginning odometer";
-            }
-            else
-            {
-                BeginningReadingTextBox.BackColor = Color.White;
-                EndingReadingTextBox.BackColor = Color.White;
-            }
 
-            // Number of Days
-            if (int.TryParse(NumberOfDaysTextBox.Text, out int days))
+            if (NumberOfDaysTextBox.Text == "")
             {
                 NumberOfDaysTextBox.BackColor = Color.LightYellow;
-                errorMessage +=" - Number of days must be a valid number";
             }
             else
             {
                 NumberOfDaysTextBox.BackColor = Color.White;
             }
-            if (days < 1 || days > 45)
-            {
-                NumberOfDaysTextBox.BackColor = Color.LightYellow;
-                errorMessage += " - Number of days must be between 1 and 45";
-            }
-            else
-            {
-                NumberOfDaysTextBox.BackColor = Color.White;
-            }
+            return isValid;
+            // check if all the fields are valid, if not change the background color
+            // to light yellow
 
-            return bool;
-            // check all the fields for valid input, if any are invalid,
-            // build an error message and return false, if all are valid return true
         }
 
-        private double GetMilesDriven()
+        void ErrorFieldsValid()
+        {
+            string errorMessage = "";
+
+        }
+        double GetMilesDriven()
         {
             double beginning = double.Parse(BeginningReadingTextBox.Text);
             double ending = double.Parse(EndingReadingTextBox.Text);
@@ -161,17 +135,17 @@ namespace CarRental
             return miles;
         }
 
-        private double KilometersToMiles(double kilometers)
+        double KilometersToMiles(double kilometers)
         {
             return kilometers * 0.621;
         }
 
-        private double CalculateDailyCharge(int days)
+        double CalculateDailyCharge(int days)
         {
             return days * 15.00;
         }
 
-        private double CalculateMileageCharge(double miles)
+        double CalculateMileageCharge(double miles)
         {
             if (miles <= 200) return 0.0;
 
@@ -194,7 +168,7 @@ namespace CarRental
             return charge;
         }
 
-        private double CalculateDiscount(double baseCharge)
+        double CalculateDiscount(double baseCharge)
         {
             double discount = 0.0;
 
@@ -210,13 +184,8 @@ namespace CarRental
         //Event handlers-------------------------------------------------------
         private void CalculateButton_Click(object sender, EventArgs e)
         {
-            if (AllFieldsValid(out string errorMessage))
-            {
-                MessageBox.Show("The following errors were found:\n" + errorMessage,
-                                "Invalid Input", MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
-                return;
-            }
+            AllFieldsValid();
+            ErrorFieldsValid();
 
             // is all the fields are valid then calculate the charges
             int milesDriven = (int)GetMilesDriven();
