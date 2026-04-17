@@ -9,6 +9,7 @@ namespace CarRental
 {
     public partial class CarRental : Form
     {
+        string errorMessage = "";
         private int totalCustomers = 0;
         private double totalMilesDriven = 0;
         private double totalCharges = 0;
@@ -45,13 +46,13 @@ namespace CarRental
 
         bool AllFieldsValid(out string errorMessage)
         {
-            errorMessage = "";
+            bool isValid = true;
 
             // Customer Information - cannot be blank
             if (string.IsNullOrWhiteSpace(CustomerNameTextBox.Text))
             {
                 CustomerNameTextBox.BackColor = Color.LightYellow;
-                errorMessage += "Customer Name is required";
+               errorMessage += " - Customer Name is required";
             }
             else
             {
@@ -60,12 +61,12 @@ namespace CarRental
             if (string.IsNullOrWhiteSpace(AddressTextBox.Text))
             {
                 AddressTextBox.BackColor = Color.LightYellow;
-                errorMessage += "Address is required";
+                errorMessage += " - Address is required";
             }
             if (string.IsNullOrWhiteSpace(CityTextBox.Text))
             {
                 CityTextBox.BackColor = Color.LightYellow;
-                errorMessage += "City is required";
+                errorMessage += " - City is required";
             }
             else
             {
@@ -74,7 +75,7 @@ namespace CarRental
             if (string.IsNullOrWhiteSpace(StateTextBox.Text))
             {
                 StateTextBox.BackColor = Color.LightYellow;
-                errorMessage += "State is required";
+                errorMessage += " - State is required";
             }
             else
             {
@@ -83,7 +84,7 @@ namespace CarRental
             if (string.IsNullOrWhiteSpace(ZipCodeTextBox.Text))
             {
                 ZipCodeTextBox.BackColor = Color.LightYellow;
-                errorMessage += "Zip Code is required";
+                errorMessage += " - Zip Code is required";
             }
             else
             {
@@ -94,7 +95,7 @@ namespace CarRental
             if (double.TryParse(BeginningReadingTextBox.Text, out double begin))
             {
                 BeginningReadingTextBox.BackColor = Color.LightYellow;
-                errorMessage += "Beginning odometer must be a valid number";
+                errorMessage +=" - Beginning odometer must be a valid number";
             }
             else    
             {
@@ -104,7 +105,7 @@ namespace CarRental
             if (double.TryParse(EndingReadingTextBox.Text, out double end))
             {
                 EndingReadingTextBox.BackColor = Color.LightYellow;
-                errorMessage += "Ending odometer must be a valid number";
+                errorMessage += " - Ending odometer must be a valid number";
             }
             else
             {
@@ -114,7 +115,7 @@ namespace CarRental
             {
                     BeginningReadingTextBox.BackColor = Color.LightYellow;
                     EndingReadingTextBox.BackColor = Color.LightYellow;
-                errorMessage += "Ending odometer must be greater than Beginning odometer";
+                errorMessage += " - Ending odometer must be greater than Beginning odometer";
             }
             else
             {
@@ -126,7 +127,7 @@ namespace CarRental
             if (int.TryParse(NumberOfDaysTextBox.Text, out int days))
             {
                 NumberOfDaysTextBox.BackColor = Color.LightYellow;
-                errorMessage += "Number of days must be a valid number";
+                errorMessage +=" - Number of days must be a valid number";
             }
             else
             {
@@ -135,14 +136,14 @@ namespace CarRental
             if (days < 1 || days > 45)
             {
                 NumberOfDaysTextBox.BackColor = Color.LightYellow;
-                errorMessage += "Number of days must be between 1 and 45";
+                errorMessage += " - Number of days must be between 1 and 45";
             }
             else
             {
                 NumberOfDaysTextBox.BackColor = Color.White;
             }
 
-            return string.IsNullOrEmpty(errorMessage);
+            return bool;
             // check all the fields for valid input, if any are invalid,
             // build an error message and return false, if all are valid return true
         }
